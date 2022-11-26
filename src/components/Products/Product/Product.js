@@ -13,7 +13,8 @@ const Product = props => {
     return (props.basePrice + props.sizes.find((size) => currentSize === size.name).additionalPrice);
   },[props.basePrice, props.sizes, currentSize]);
   
-  const addToCart = () => {
+  const addToCart = event => {
+    event.preventDefault();
     console.log('Name:', props.title);
     console.log('Price:', getPrice);
     console.log('Size:', currentSize);
@@ -23,14 +24,14 @@ const Product = props => {
 
   return (
     <article className={styles.product}>
-      <ProductImage name={props.name} currentColor={props.currentColor} title={props.title} />
+      <ProductImage name={props.name} currentColor={currentColor} title={props.title} />
 
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
           <span className={styles.price}>Price: {getPrice}$</span>
         </header>
-        <ProductForm addToCart={addToCart} sizes={props.sizes} currentSize={props.currentSize} setCurrentSize={setCurrentSize} colors={props.colors} currentColor={props.currentColor} setCurrentColor={setCurrentColor} />
+        <ProductForm addToCart={addToCart} sizes={props.sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} colors={props.colors} currentColor={currentColor} setCurrentColor={setCurrentColor} />
       </div>
     </article>
   );
